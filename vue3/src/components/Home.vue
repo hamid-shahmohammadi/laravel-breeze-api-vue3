@@ -1,21 +1,21 @@
 <script setup>
-import { onMounted, ref } from 'vue';
 import axios from 'axios';
+import { onMounted, ref } from 'vue';
 
-const user = ref()
+const user = ref();
 
 onMounted(async () => {
-    const data = await axios.get('api/user')
+    const data = await axios.get('/api/user')
     user.value = data.data
-    console.log(user.value)
 })
 </script>
 
 <template>
-    <div class="mx-auto w-3/4">
-        <h2>{{ user?.name }}</h2>
-        <p>{{ user?.email }}</p>
+    <div class="mx-auto w-1/2">
+        <h1>home</h1>
+        <h1>{{ user?.name }}</h1>
+        <h1>{{ user?.email }}</h1>
     </div>
 </template>
 
-<style scoped></style>
+

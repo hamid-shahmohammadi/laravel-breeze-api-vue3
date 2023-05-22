@@ -15,11 +15,14 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): Response
     {
+
         $request->authenticate();
 
         $request->session()->regenerate();
 
         return response()->noContent();
+        // $token = $request->user()->createToken('login');
+        // return response($token->plainTextToken);
     }
 
     /**
