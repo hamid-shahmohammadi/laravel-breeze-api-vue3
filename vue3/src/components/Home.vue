@@ -13,7 +13,7 @@ onMounted(async () => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         }
-    })
+    });
     user.value = data.data
     console.log(user.value)
 
