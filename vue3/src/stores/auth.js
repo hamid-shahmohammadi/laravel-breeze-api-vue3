@@ -18,7 +18,7 @@ export const useAuthStore = defineStore("auth", {
             await axios.get('/sanctum/csrf-cookie')
         },
         async getUser() {
-            this.getToken()
+            await this.getToken()
             this.authToken = localStorage.getItem("token-login");
             const data = await axios.get('/api/user', {
                 headers: {
