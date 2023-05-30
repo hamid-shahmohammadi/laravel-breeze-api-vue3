@@ -1,31 +1,24 @@
 <script setup>
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
+import { useAuthStore } from '../stores/auth';
 
-const user = ref();
+const authStore = useAuthStore()
 
 onMounted(async () => {
-
-    let token = localStorage.getItem("token-login");
-    console.log(token)
-    const data = await axios.get('/api/user', {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        }
-    });
-    user.value = data.data
-    console.log(user.value)
-
+    authStore.getUser()
 })
 </script>
 
 <template>
     <div class="mx-auto w-1/2">
-        <h1>home</h1>
-        <h1>{{ user?.name }}</h1>
-        <h1>{{ user?.email }}</h1>
+        <div v-if="authStore.user">
+            <h1>{{ authStore.user.name }}</h1>
+            <p>{{ authStore.user.email }}</p>
+        </div>
+        <div v-else>
+            <h1>Pls Login</h1>
+        </div>
     </div>
 </template>
 
-<style scoped></style>
+
