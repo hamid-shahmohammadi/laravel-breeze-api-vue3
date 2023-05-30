@@ -1,20 +1,18 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import axios from 'axios';
+import { onMounted } from 'vue';
+import { useAuthStore } from "../stores/auth"
 
-const user = ref()
+const authStore = useAuthStore()
 
 onMounted(async () => {
-    const data = await axios.get('api/user')
-    user.value = data.data
-    console.log(user.value)
+    authStore.getUser()
 })
 </script>
 
 <template>
     <div class="mx-auto w-3/4">
-        <h2>{{ user?.name }}</h2>
-        <p>{{ user?.email }}</p>
+        <h2>{{ authStore.user?.name }}</h2>
+        <p>{{ authStore.user?.email }}</p>
     </div>
 </template>
 
